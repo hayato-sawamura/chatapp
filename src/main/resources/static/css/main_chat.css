@@ -29,7 +29,7 @@
   padding: 20px;
 }
 
-.main_chat-messages {
+.main_chat-messages::-webkit-scrollbar {
   height: calc(100vh - 100px - 90px);
   background-color: #FAFAFA;
   padding: 46px 20px 0 20px;

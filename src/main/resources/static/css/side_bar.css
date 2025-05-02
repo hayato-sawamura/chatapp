@@ -27,15 +27,17 @@
   text-decoration: none;
 }
 
-.side_bar-main {
+.side_bar-main::-webkit-scrollbar {
   height: calc(100vh - 100px);
   background-color: #2f3e51;
   padding: 0 20px;
-  overflow: scroll;
+  overflow-y: scroll;
+  /* webkit-scrollbar */
 }
 
+
 .side_bar-main-chat_room {
-  padding: 20px 0 40px 0;s
+  padding: 20px 20px 40px 20px;
 }
 
 .side_bar-main-chat_room a {
