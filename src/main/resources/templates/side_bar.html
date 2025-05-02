@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" th:href="@{/css/side_bar.css}">
+</head>
+<body>
+  <div th:fragment="side_bar">
+    <div class="side_bar-header">
+      <div class="side_bar-header-username">
+        <a href="#">Tom(ユーザー名)</a>
+      </div>
+      <div class="side_bar-header-create_chat_btn">
+        <a href="#">チャットを作成する</a>
+      </div>
+    </div>
+    <div class="side_bar-main">
+      <div class="side_bar-main-chat_room">
+        <a href="#">techroom1</a>
+      </div>
+      <div class="side_bar-main-chat_room">
+        <a href="#">techroom2</a>
+      </div>
+      <div class="side_bar-main-chat_room">
+        <a href="#">techroom3</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

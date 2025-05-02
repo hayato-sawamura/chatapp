@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" th:href="@{/css/main_chat.css}">
+</head>
+<body>
+  <div th:fragment="main_chat">
+    <div class="main_chat-header">
+      <div class="main_chat-header-title">
+        Chat Title
+      </div>
+      <div class="main_chat-header-chat_end_btn">
+        <a href="#">Chat Btn</a>
+      </div>
+    </div>
+    <div class="main_chat-messages">
+      <div class="main_chat-message">
+        <div class="main_chat-message-user-and-date">
+          <div class="main_chat-message-username">太郎</div>
+          <div class="main_chat-message-date">2025.5.2</div>
+        </div>
+        <div class="main_chat-message-content">おはよう</div>
+      </div>
+      <div class="main_chat-message">
+        <div class="main_chat-message-user-and-date">
+          <div class="main_chat-message-username">隼</div>
+          <div class="main_chat-message-date">2025.5.2</div>
+        </div>
+        <div class="main_chat-message-content">おはよう！</div>
+      </div>
+    </div>
+    <div class="main_chat-message-form">
+      <div class="main_chat-message-form-input">
+        <input type="text" placeholder="type a message" class="main_chat-message-form-text">
+        <label class="main_chat-message-form-image">
+          <span>画像</span>
+          <input type="file" class="hidden">
+        </label>  
+      </div>
+      <input type="submit" value="送信" class="main_chat-message-send-btn">
+    </div>
+  </div>
+</body>
+</html>
