@@ -1,0 +1,46 @@
+.side_bar-container {
+  height: 100vh;
+  width: 300px;
+  background-color: #253141;
+}
+
+.side_bar-header {
+  height: 100px;
+  background-color: #253141;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.side_bar-header-username a {
+  font-size: 16px;
+  color: #fafafa;
+  text-decoration: none;
+}
+
+.side_bar-header-create_chat_btn a {
+  font-size: 10px;
+  color: deepskyblue;
+  border: 1px solid lightblue;
+  padding: 14px;
+  text-decoration: none;
+}
+
+.side_bar-main::-webkit-scrollbar {
+  height: calc(100vh - 100px);
+  background-color: #2f3e51;
+  padding: 0 20px;
+  overflow-y: scroll;
+}
+
+
+.side_bar-main-chat_room {
+  padding: 20px 20px 40px 20px;
+}
+
+.side_bar-main-chat_room a {
+  color: white;
+  text-decoration: none;
+}
+
