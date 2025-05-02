@@ -1,0 +1,22 @@
+.main_chat-container {
+  height: 100%;
+  width: calc(100vw - 300px);
+  background-color: #ffffff;
+  padding: 0 40px;
+}
+
+.main_chat-header {
+  height: 100px;
+}
+
+.main_chat-messages {
+  height: calc(100vh - 100px - 90px);
+  background-color: #FAFAFA;
+  padding-top: 46px;
+}
+
+.main_chat-message-form {
+  height: 90px;
+  background-color: #DDDDDD;
+  padding: 20px 0;
+}

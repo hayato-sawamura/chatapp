@@ -7,13 +7,16 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
   <link rel="stylesheet" th:href="@{/css/style.css}">
   <link rel="stylesheet" th:href="@{/css/side_bar.css}">
+  <link rel="stylesheet" th:href="@{/css/main_chat.css}">
 </head>
 <body>
   <div class="wrapper">
     <div class="side_bar-container">
       <div th:insert="~{side_bar :: side_bar}"></div>
     </div>
+    <div class="main_chat-container">
       <div th:insert="~{main_chat :: main_chat}"></div>
+    </div>
   </div>
 </body>
 </html>
