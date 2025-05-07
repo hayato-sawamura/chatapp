@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import in.tech_camp.chatapp.entity.UserEntity;
 
@@ -25,9 +26,15 @@ public interface UserRepository {
   @Options(useGeneratedKeys = true, keyProperty = "id")
   void insertUser(UserEntity user);
 
-  @Select("SELECT * from users")
+  @Select("SELECT * FROM users")
   List<UserEntity> getUsers();
 
-  @Select("SELECT * from users WHERE email = #{email}")
-  UserEntity getUsersByEmail(String email);
+  @Select("SELECT * FROM users WHERE email = #{email}")
+  UserEntity getUserByEmail(String email);
+
+  @Select("SELECT * FROM users WHERE id = #{id}")
+  UserEntity getUserById(Integer id);
+
+  @Update("UPDATE users SET name = #{name}, email = #{email} WHERE id = #{id}")
+  void updateUser(UserEntity user);
 }
