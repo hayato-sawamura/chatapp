@@ -37,4 +37,7 @@ public interface UserRepository {
 
   @Update("UPDATE users SET name = #{name}, email = #{email} WHERE id = #{id}")
   void updateUser(UserEntity user);
+
+  @Select("SELECT EXISTS(SELECT 1 FROM users WHERE email = #{email})")
+  boolean existsByEmail(String email);
 }
