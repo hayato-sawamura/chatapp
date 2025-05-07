@@ -98,4 +98,7 @@ public class UserController {
     }
     return "redirect:/";
   }
+
+  // logout機能はSecurityConfigファイルで作成しているため記述しなくよい
+
 }
