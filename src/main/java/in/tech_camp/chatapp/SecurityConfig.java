@@ -1,4 +1,4 @@
-package in.tech_camp.chat_app;
+package in.tech_camp.chatapp;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

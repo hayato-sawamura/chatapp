@@ -1,0 +1,7 @@
+spring.application.name=chatapp
+
+spring.datasource.driverClassName=org.postgresql.Driver
+spring.datasource.url=jdbc:postgresql://<IP ADDRESS>/chatapp
+spring.datasource.username= YOU-HAVE-DB-NAME
+spring.datasource.password= YOU-HAVE-DB-PASSWORD
+spring.flyway.baselineOnMigrate=true
