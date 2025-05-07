@@ -13,7 +13,6 @@ import in.tech_camp.chatapp.form.LoginForm;
 import in.tech_camp.chatapp.form.UserEditForm;
 import in.tech_camp.chatapp.form.UserForm;
 import in.tech_camp.chatapp.repository.UserRepository;
-import in.tech_camp.chatapp.service.UserAuthenticationService;
 import in.tech_camp.chatapp.service.UserService;
 import lombok.AllArgsConstructor;
 
@@ -21,7 +20,6 @@ import lombok.AllArgsConstructor;
 @Controller
 @AllArgsConstructor
 public class UserController {
-  private final UserAuthenticationService userAuthenticationService;
   private final UserService userService;
   private final UserRepository userRepository;
 

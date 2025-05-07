@@ -7,7 +7,7 @@
   <div th:fragment="side_bar">
     <div class="side_bar-header">
       <div class="side_bar-header-username">
-        <a href="#">Tom(ユーザー名)</a>
+        <a th:href="@{/users/{userId}/edit(userId=${user.id})}" th:text="${user.name}"></a>
       </div>
       <div class="side_bar-header-create_chat_btn">
         <a href="#">チャットを作成する</a>
