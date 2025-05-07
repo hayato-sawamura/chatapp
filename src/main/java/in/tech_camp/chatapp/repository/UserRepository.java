@@ -40,4 +40,7 @@ public interface UserRepository {
 
   @Select("SELECT EXISTS(SELECT 1 FROM users WHERE email = #{email})")
   boolean existsByEmail(String email);
+
+  @Select("SELECT * FROM users WHERE id <> #{id}")
+  List<UserEntity> getUsersExceptId(Integer id);
 }
