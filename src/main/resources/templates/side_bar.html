@@ -10,18 +10,12 @@
         <a th:href="@{/users/{userId}/edit(userId=${user.id})}" th:text="${user.name}"></a>
       </div>
       <div class="side_bar-header-create_chat_btn">
-        <a href="#">チャットを作成する</a>
+        <a th:href="@{/rooms/new}">チャットを作成する</a>
       </div>
     </div>
     <div class="side_bar-main">
-      <div class="side_bar-main-chat_room">
-        <a href="#">techroom1</a>
-      </div>
-      <div class="side_bar-main-chat_room">
-        <a href="#">techroom2</a>
-      </div>
-      <div class="side_bar-main-chat_room">
-        <a href="#">techroom3</a>
+      <div th:each="room : ${rooms}", class="side_bar-main-chat_room">
+        <a href="" th:text="${room.name}"></a>
       </div>
     </div>
   </div>

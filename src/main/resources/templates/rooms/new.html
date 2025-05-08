@@ -31,7 +31,7 @@
         </div>
         <div class='chat-room-form__field--right'>
           <select th:field="*{memberIds}">
-            <option>チャットするユーザーを選択して下さい</option>
+            <option value="">チャットするユーザーを選択して下さい</option>
             <div th:each="user : ${users}">
               <option th:value="${user.id}" th:text="${user.name}"></option>
             </div>

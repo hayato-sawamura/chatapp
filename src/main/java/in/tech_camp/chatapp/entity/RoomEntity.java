@@ -8,5 +8,5 @@ import lombok.Data;
 public class RoomEntity {
   private Integer id;
   private String name;
-  private List<RoomUserEntitny> roomUsers; 
+  private List<RoomUserEntity> roomUsers; 
 }
