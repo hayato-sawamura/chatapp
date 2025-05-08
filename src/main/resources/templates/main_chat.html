@@ -14,21 +14,13 @@
       </div>
     </div>
     <div class="main_chat-messages">
-      <div class="main_chat-message">
+      <div th:each="message : ${messages}" class="main_chat-message">
         <div class="main_chat-message-user-and-date">
-          <div class="main_chat-message-username">太郎</div>
-          <div class="main_chat-message-date">2025.5.2</div>
+          <div th:text="${message.user.name}" class="main_chat-message-username"></div>
+          <div th:text="${#dates.format(message.createdAt, 'yyyy/MM/dd HH:mm:ss')}" class="main_chat-message-date"></div>
         </div>
-        <div class="main_chat-message-content">おはよう</div>
+        <div th:text="${message.content}" class="main_chat-message-content"></div>
       </div>
-      <div class="main_chat-message">
-        <div class="main_chat-message-user-and-date">
-          <div class="main_chat-message-username">隼</div>
-          <div class="main_chat-message-date">2025.5.2</div>
-        </div>
-        <div class="main_chat-message-content">おはよう！</div>
-      </div>
-    </div>
     <form th:action="@{/rooms/{roomId}/messages(roomId=${roomId})}" method="post" th:object="${messageForm}" class="main_chat-message-form">
       <div class="main_chat-message-form-input">
         <input th:field="*{content}" class="form-message" placeholder= "type a message">
