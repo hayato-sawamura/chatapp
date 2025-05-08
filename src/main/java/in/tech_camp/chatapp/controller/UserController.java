@@ -39,7 +39,7 @@ public class UserController {
 
   // SecurityConfigで許可したPostメソッドのパス名記述（.requestMatchers(HttpMethod.POST, "/user").permitAll()）
   @PostMapping("/user")
-  public String newUser(@ModelAttribute("userForm") @Validated(ValidationOrder.class) UserForm userForm, BindingResult result, Model model) {
+  public String newUser(@ModelAttribute("UserForm") @Validated(ValidationOrder.class) UserForm userForm, BindingResult result, Model model) {
     userForm.validatePasswordConfirmation(result);
     if (userRepository.existsByEmail(userForm.getEmail())) {
       result.rejectValue("email", "null", "Email already exists");
@@ -78,7 +78,7 @@ public class UserController {
     }
     
     @GetMapping("/login")
-    public String login(@RequestParam(value = "error", required = false) String error, @ModelAttribute("loginForm") LoginForm loginForm, Model model) {
+    public String login(@RequestParam(value = "error", required = false) String error, @ModelAttribute("LoginForm") LoginForm loginForm, Model model) {
       if (error != null) {
         model.addAttribute("loginError", "メールアドレスかパスワードが間違っています。");
       }
