@@ -29,16 +29,16 @@
         <div class="main_chat-message-content">おはよう！</div>
       </div>
     </div>
-    <div class="main_chat-message-form">
+    <form th:action="@{/rooms/{roomId}/messages(roomId=${roomId})}" method="post" th:object="${messageForm}" class="main_chat-message-form">
       <div class="main_chat-message-form-input">
-        <input type="text" placeholder="type a message" class="main_chat-message-form-text">
+        <input th:field="*{content}" class="form-message" placeholder= "type a message">
         <label class="main_chat-message-form-image">
           <span>画像</span>
           <input type="file" class="hidden">
         </label>  
-      </div>
+      </div >
       <input type="submit" value="送信" class="main_chat-message-send-btn">
-    </div>
+    </form>
   </div>
 </body>
 </html>

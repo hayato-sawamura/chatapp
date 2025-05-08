@@ -8,8 +8,6 @@ import lombok.Data;
 public class MessageEntity {
   private Integer id;
   private String content;
-  private Integer user_id;
-  private Integer room_id;
   private String image;
   private Timestamp created_at;
   private UserEntity user;
