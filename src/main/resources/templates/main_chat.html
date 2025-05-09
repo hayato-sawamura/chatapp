@@ -20,6 +20,9 @@
         </div>
         <div th:text="${message.content}" class="main_chat-message-content"></div>
       </div>
+    <div th:if="${errorMessages}" th:each="errorMessage : ${errorMessages}">
+      <div th:text="${errorMessage}"></div>
+    </div>
     <form th:action="@{/rooms/{roomId}/messages(roomId=${currentRoom.id})}" method="post" th:object="${messageForm}" class="main_chat-message-form">
       <div class="main_chat-message-form-input">
         <input th:field="*{content}" class="form-message" placeholder= "type a message">

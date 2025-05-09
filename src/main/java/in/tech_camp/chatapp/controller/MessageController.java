@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +23,7 @@ import in.tech_camp.chatapp.repository.MessageRepository;
 import in.tech_camp.chatapp.repository.RoomRepository;
 import in.tech_camp.chatapp.repository.RoomUserRepository;
 import in.tech_camp.chatapp.repository.UserRepository;
+import in.tech_camp.chatapp.validation.ValidationOrder;
 import lombok.AllArgsConstructor;
 
 
@@ -74,38 +77,31 @@ public class MessageController {
   
   @GetMapping("/rooms/{roomId}/messages")
   public String showMessages(@PathVariable("roomId") Integer roomId, @AuthenticationPrincipal CustomUserDetails currentUser, Model model){
-    model.addAttribute("currentUser", userRepository.getUserById(currentUser.getId()));
-    
-    List<RoomUserEntity> roomUser = roomUserRepository.getRoomUserByUserId(currentUser.getId());
-    List<RoomEntity> rooms = roomUser.stream()
-        .map(RoomUserEntity::getRoom)
-        .collect(Collectors.toList());
-    model.addAttribute("rooms", rooms);
-
-    model.addAttribute("currentRoom", roomRepository.getRoomById(roomId));
-
-    List<MessageEntity> messages = messageRepository.getMessagesByRoomId(roomId);
-    model.addAttribute("messages", messages);
- 
-    model.addAttribute("messageForm", new MessageForm());
-  
+    // messageModel.showMessagesModel(roomId, currentUser, model);
     return "messages/index";
   }
 
   @PostMapping("/rooms/{roomId}/messages")
-  public String saveMessage(@ModelAttribute("messageForm") MessageForm messageForm, @PathVariable("roomId") Integer roomId, @AuthenticationPrincipal CustomUserDetails currentUser) {
+  public String saveMessage(@ModelAttribute("messageForm") @Validated(ValidationOrder.class) MessageForm messageForm, BindingResult result, @PathVariable("roomId") Integer roomId, @AuthenticationPrincipal CustomUserDetails currentUser, Model model) {
+    if (result.hasErrors()) {
+      System.err.println("Error" + result.getAllErrors().toString());
+      return "redirect:/rooms/" + roomId + "/messages";
+    }
+
+    
     MessageEntity message = new MessageEntity();
     message.setContent(messageForm.getContent());
-
+    
     UserEntity user = userRepository.getUserById(currentUser.getId());
     RoomEntity room = roomRepository.getRoomById(roomId);
     message.setUser(user);
     message.setRoom(room);
-
+    
     try {
       messageRepository.insertMessage(message);
     } catch (Exception e) {
       System.out.println("Error：" + e);
+      model.addAttribute("errorMessages", "メッセージの内容が保存できませんでした。");
       return "redirect:/rooms/" + roomId + "/messages";
     }
     return "redirect:/rooms/" + roomId + "/messages";
