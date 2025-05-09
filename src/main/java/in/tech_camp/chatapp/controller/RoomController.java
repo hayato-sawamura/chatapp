@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import in.tech_camp.chatapp.entity.RoomEntity;
@@ -23,6 +24,7 @@ import in.tech_camp.chatapp.repository.RoomUserRepository;
 import in.tech_camp.chatapp.repository.UserRepository;
 import in.tech_camp.chatapp.validation.ValidationOrder;
 import lombok.AllArgsConstructor;
+
 
 
 @Controller
@@ -80,7 +82,7 @@ public class RoomController {
       try {
         roomUserRepository.insertRoomUser(roomUserEntity);
       } catch (Exception e) {
-        System.out.println("エラー：" + e);
+        System.out.println("Error:" + e);
         List<UserEntity> users = userRepository.getUsersExceptId(currentUser.getId());
         model.addAttribute("users", users);
         model.addAttribute("roomForm", new RoomForm());
@@ -89,4 +91,11 @@ public class RoomController {
     }
     return "redirect:/";
   }
+
+  @PostMapping("/rooms/{roomId}/delete")
+  public String postMethodName(@PathVariable("roomId") Integer roomId) {
+      roomRepository.deleteRoomById(roomId);
+      return "redirect:/";
+  }
+  
 }

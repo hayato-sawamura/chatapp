@@ -7,7 +7,7 @@
   <div th:fragment="side_bar">
     <div class="side_bar-header">
       <div class="side_bar-header-username">
-        <a th:href="@{/users/{userId}/edit(userId=${user.id})}" th:text="${user.name}"></a>
+        <a th:href="@{/users/{userId}/edit(userId=${currentUser.id})}" th:text="${currentUser.name}"></a>
       </div>
       <div class="side_bar-header-create_chat_btn">
         <a th:href="@{/rooms/new}">チャットを作成する</a>
@@ -15,7 +15,7 @@
     </div>
     <div class="side_bar-main">
       <div th:each="room : ${rooms}", class="side_bar-main-chat_room">
-        <a href="" th:text="${room.name}"></a>
+        <a th:href="@{/rooms/{roomId}/messages(roomId=${room.id})}" th:text="${room.name}"></a>
       </div>
     </div>
   </div>

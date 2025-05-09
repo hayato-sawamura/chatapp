@@ -6,39 +6,33 @@
 <body>
   <div th:fragment="main_chat">
     <div class="main_chat-header">
-      <div class="main_chat-header-title">
-        Chat Title
+      <div th:text="${currentRoom.name}" class="main_chat-header-title">
       </div>
-      <div class="main_chat-header-chat_end_btn">
-        <a href="#">Chat Btn</a>
-      </div>
+      <form th:action="@{/rooms/{roomId}/delete(roomId=${currentRoom.id})}" method="post" class="main_chat-header-chat_end_btn">
+        <input type="submit" value="チャットを終了する"/>
+      </form>
     </div>
     <div class="main_chat-messages">
-      <div class="main_chat-message">
+      <div th:each="message : ${messages}" class="main_chat-message">
         <div class="main_chat-message-user-and-date">
-          <div class="main_chat-message-username">太郎</div>
-          <div class="main_chat-message-date">2025.5.2</div>
+          <div th:text="${message.user.name}" class="main_chat-message-username"></div>
+          <div th:text="${#dates.format(message.createdAt, 'yyyy/MM/dd HH:mm:ss')}" class="main_chat-message-date"></div>
         </div>
-        <div class="main_chat-message-content">おはよう</div>
+        <div th:text="${message.content}" class="main_chat-message-content"></div>
       </div>
-      <div class="main_chat-message">
-        <div class="main_chat-message-user-and-date">
-          <div class="main_chat-message-username">隼</div>
-          <div class="main_chat-message-date">2025.5.2</div>
-        </div>
-        <div class="main_chat-message-content">おはよう！</div>
-      </div>
+    <div th:if="${errorMessages}" th:each="errorMessage : ${errorMessages}">
+      <div th:text="${errorMessage}"></div>
     </div>
-    <div class="main_chat-message-form">
+    <form th:action="@{/rooms/{roomId}/messages(roomId=${currentRoom.id})}" method="post" th:object="${messageForm}" class="main_chat-message-form">
       <div class="main_chat-message-form-input">
-        <input type="text" placeholder="type a message" class="main_chat-message-form-text">
+        <input th:field="*{content}" class="form-message" placeholder= "type a message">
         <label class="main_chat-message-form-image">
           <span>画像</span>
           <input type="file" class="hidden">
         </label>  
-      </div>
+      </div >
       <input type="submit" value="送信" class="main_chat-message-send-btn">
-    </div>
+    </form>
   </div>
 </body>
 </html>
