@@ -19,16 +19,19 @@
           <div th:text="${#dates.format(message.createdAt, 'yyyy/MM/dd HH:mm:ss')}" class="main_chat-message-date"></div>
         </div>
         <div th:text="${message.content}" class="main_chat-message-content"></div>
+        <div th:if="${message.image}">
+          <img th:src="@{${message.image}}" alt="メッセージ画像" style="width: 500px; height: 500px;"/>
+        </div>
       </div>
     <div th:if="${errorMessages}" th:each="errorMessage : ${errorMessages}">
       <div th:text="${errorMessage}"></div>
     </div>
-    <form th:action="@{/rooms/{roomId}/messages(roomId=${currentRoom.id})}" method="post" th:object="${messageForm}" class="main_chat-message-form">
+    <form th:action="@{/rooms/{roomId}/messages(roomId=${currentRoom.id})}" method="post" th:object="${messageForm}" enctype="multipart/form-data" class="main_chat-message-form">
       <div class="main_chat-message-form-input">
         <input th:field="*{content}" class="form-message" placeholder= "type a message">
         <label class="main_chat-message-form-image">
           <span>画像</span>
-          <input type="file" class="hidden">
+          <input type="file" th:field="*{image}" class="hidden">
         </label>  
       </div >
       <input type="submit" value="送信" class="main_chat-message-send-btn">
