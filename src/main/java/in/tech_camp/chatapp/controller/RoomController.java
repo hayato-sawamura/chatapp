@@ -48,7 +48,6 @@ public class RoomController {
     if (roomForm.getMemberIds() == null) {
       result.rejectValue("user_id", "error.user", "This item is a questions");
     }
-    System.err.println("チャットルーム作成を開始いたします");
 
     if (result.hasErrors()) {
       List<String> errorMessages = result.getAllErrors().stream()

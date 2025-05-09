@@ -19,6 +19,9 @@
           <div th:text="${#dates.format(message.createdAt, 'yyyy/MM/dd HH:mm:ss')}" class="main_chat-message-date"></div>
         </div>
         <div th:text="${message.content}" class="main_chat-message-content"></div>
+        <div th:if="${message.image}">
+          <img th:src="@{${message.image}}" alt="メッセージ画像" style="width: 500px; height: 500px;"/>
+        </div>
       </div>
     <div th:if="${errorMessages}" th:each="errorMessage : ${errorMessages}">
       <div th:text="${errorMessage}"></div>
