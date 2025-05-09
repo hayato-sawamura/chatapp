@@ -8,9 +8,9 @@
     <div class="main_chat-header">
       <div th:text="${currentRoom.name}" class="main_chat-header-title">
       </div>
-      <div class="main_chat-header-chat_end_btn">
-        <a href="#">Chat Btn</a>
-      </div>
+      <form th:action="@{/rooms/{roomId}/delete(roomId=${currentRoom.id})}" method="post" class="main_chat-header-chat_end_btn">
+        <input type="submit" value="チャットを終了する"/>
+      </form>
     </div>
     <div class="main_chat-messages">
       <div th:each="message : ${messages}" class="main_chat-message">

@@ -77,7 +77,21 @@ public class MessageController {
   
   @GetMapping("/rooms/{roomId}/messages")
   public String showMessages(@PathVariable("roomId") Integer roomId, @AuthenticationPrincipal CustomUserDetails currentUser, Model model){
-    // messageModel.showMessagesModel(roomId, currentUser, model);
+    model.addAttribute("currentUser", userRepository.getUserById(currentUser.getId()));
+    
+    List<RoomUserEntity> roomUser = roomUserRepository.getRoomUserByUserId(currentUser.getId());
+    List<RoomEntity> rooms = roomUser.stream()
+        .map(RoomUserEntity::getRoom)
+        .collect(Collectors.toList());
+    model.addAttribute("rooms", rooms);
+
+    model.addAttribute("currentRoom", roomRepository.getRoomById(roomId));
+
+    List<MessageEntity> messages = messageRepository.getMessagesByRoomId(roomId);
+    model.addAttribute("messages", messages);
+ 
+    model.addAttribute("messageForm", new MessageForm());
+  
     return "messages/index";
   }
 
