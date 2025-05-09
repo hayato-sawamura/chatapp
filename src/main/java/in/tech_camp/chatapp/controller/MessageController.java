@@ -42,7 +42,7 @@ public class MessageController {
     // https://spring.pleiades.io/spring-security/site/docs/current/api/org/springframework/security/core/Authentication.html#getPrincipal()
 
     // messages/indexに名前とeditに遷移するためのユーザーIDの情報を渡すためにログインしてるユーザーの情報を取得し
-    model.addAttribute("user", userRepository.getUserById(currentUser.getId()));
+    model.addAttribute("currentUser", userRepository.getUserById(currentUser.getId()));
     
     List<RoomUserEntity> roomUser = roomUserRepository.getRoomUserByUserId(currentUser.getId());
     List<RoomEntity> rooms = roomUser.stream()
@@ -61,7 +61,7 @@ public class MessageController {
     // https://spring.pleiades.io/spring-security/site/docs/current/api/org/springframework/security/core/Authentication.html#getPrincipal()
 
     // messages/indexに名前とeditに遷移するためのユーザーIDの情報を渡すためにログインしてるユーザーの情報を取得し
-    model.addAttribute("user", userRepository.getUserById(currentUser.getId()));
+    model.addAttribute("currentUser", userRepository.getUserById(currentUser.getId()));
     
     List<RoomUserEntity> roomUser = roomUserRepository.getRoomUserByUserId(currentUser.getId());
     List<RoomEntity> rooms = roomUser.stream()
@@ -74,18 +74,21 @@ public class MessageController {
   
   @GetMapping("/rooms/{roomId}/messages")
   public String showMessages(@PathVariable("roomId") Integer roomId, @AuthenticationPrincipal CustomUserDetails currentUser, Model model){
-    model.addAttribute("user", userRepository.getUserById(currentUser.getId()));
+    model.addAttribute("currentUser", userRepository.getUserById(currentUser.getId()));
     
     List<RoomUserEntity> roomUser = roomUserRepository.getRoomUserByUserId(currentUser.getId());
     List<RoomEntity> rooms = roomUser.stream()
         .map(RoomUserEntity::getRoom)
         .collect(Collectors.toList());
     model.addAttribute("rooms", rooms);
-    model.addAttribute("messageForm", new MessageForm());
-    model.addAttribute("roomId", roomId);
+
+    model.addAttribute("currentRoom", roomRepository.getRoomById(roomId));
 
     List<MessageEntity> messages = messageRepository.getMessagesByRoomId(roomId);
     model.addAttribute("messages", messages);
+ 
+    model.addAttribute("messageForm", new MessageForm());
+  
     return "messages/index";
   }
 

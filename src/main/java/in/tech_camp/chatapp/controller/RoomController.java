@@ -80,7 +80,7 @@ public class RoomController {
       try {
         roomUserRepository.insertRoomUser(roomUserEntity);
       } catch (Exception e) {
-        System.out.println("エラー：" + e);
+        System.out.println("Error:" + e);
         List<UserEntity> users = userRepository.getUsersExceptId(currentUser.getId());
         model.addAttribute("users", users);
         model.addAttribute("roomForm", new RoomForm());

@@ -6,8 +6,7 @@
 <body>
   <div th:fragment="main_chat">
     <div class="main_chat-header">
-      <div class="main_chat-header-title">
-        Chat Title
+      <div th:text="${currentRoom.name}" class="main_chat-header-title">
       </div>
       <div class="main_chat-header-chat_end_btn">
         <a href="#">Chat Btn</a>
@@ -21,7 +20,7 @@
         </div>
         <div th:text="${message.content}" class="main_chat-message-content"></div>
       </div>
-    <form th:action="@{/rooms/{roomId}/messages(roomId=${roomId})}" method="post" th:object="${messageForm}" class="main_chat-message-form">
+    <form th:action="@{/rooms/{roomId}/messages(roomId=${currentRoom.id})}" method="post" th:object="${messageForm}" class="main_chat-message-form">
       <div class="main_chat-message-form-input">
         <input th:field="*{content}" class="form-message" placeholder= "type a message">
         <label class="main_chat-message-form-image">
