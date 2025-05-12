@@ -234,7 +234,7 @@ public class MessageIntegrationTest {
 
   List<MessageEntity> beforeMessages = messageRepository.getMessagesByRoomId(roomEntity.getId());
 
-      // チャットルームには先ほどの投稿が存在することを確認する（テキスト）
+  // チャットルームには先ほどの投稿が存在することを確認する（テキスト）
   mockMvc.perform(MockMvcRequestBuilders.multipart("/rooms/{roomId}/messages", roomEntity.getId())
           .file((MockMultipartFile)messageForm.getImage())
           .param("content", messageForm.getContent())
