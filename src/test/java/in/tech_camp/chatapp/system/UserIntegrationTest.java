@@ -65,7 +65,7 @@ public class UserIntegrationTest {
     .andReturn();
     assertNotNull(loginResult.getRequest().getSession());
     assertEquals("/", loginResult.getResponse().getRedirectedUrl());    
-    System.out.println("ログイン成功の場合：" + loginResult.getResponse().getRedirectedUrl());
+    System.out.println("ログイン成功の場合：" + loginResult.getResponse().getContentAsString());
     
     UserDetails customUser = userAuthenticationService.loadUserByUsername(userForm.getEmail());
     // トップページに再度アクセスし、ログインできていることを確認する
@@ -93,12 +93,13 @@ public class UserIntegrationTest {
                     .andReturn();
 
     // エラーパスにリダイレクトされたとき、サインインのビューが表示される
-    System.err.println("サインインのビュー表示：" + loginResult.getResponse().getStatus());
-
-    mockMvc.perform(MockMvcRequestBuilders.get("/users/login?error"))
-                    .andExpect(MockMvcResultMatchers.status().isOk())
-                    .andExpect(MockMvcResultMatchers.view().name("users/login"))
-                    .andExpect(MockMvcResultMatchers.content().string(org.hamcrest.Matchers.containsString("登録しているユーザーでログイン")));
-    // System.out.println("サインインのビュー表示：" + loginResult.getResponse().getContentAsString());
+    
+    MvcResult loginErrorResult = mockMvc.perform(MockMvcRequestBuilders.get("/login?error").param("error", ""))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("users/login"))
+                .andExpect(MockMvcResultMatchers.content().string(org.hamcrest.Matchers.containsString("登録しているユーザーでログイン")))
+                .andExpect(MockMvcResultMatchers.content().string(org.hamcrest.Matchers.containsString("メールアドレスもしくはパスワードが間違っています。")))
+                .andReturn();
+    System.err.println("サインインのビュー表示：" + loginErrorResult.getResponse().getContentAsString());
   }
 }
