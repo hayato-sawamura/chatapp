@@ -108,11 +108,10 @@ public class MessageController {
       System.err.println("Error" + result.getAllErrors().toString());
       return "redirect:/rooms/" + roomId + "/messages";
     }
-    
-    
+
     MessageEntity message = new MessageEntity();
     message.setContent(messageForm.getContent());
-    
+
     MultipartFile imageFile = messageForm.getImage();
     if (imageFile != null && !imageFile.isEmpty()) {
       try {
